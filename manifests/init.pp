@@ -11,20 +11,33 @@
 #
 class erlang(
   $version = 'present',
-) {
-  include apt
+) 
+{
   validate_string($version)
-  validate_re($::osfamily, '^Debian$', 'This module uses a debian repository')
 
-  apt::source { 'erlang':
-    location   => 'http://binaries.erlang-solutions.com/debian',
-    repos      => 'contrib',
-    key        => 'A14F4FCA',
-    #key_source => 'http://binaries.erlang-solutions.com/debian/erlang_solutions.asc',
-  }
-
-  package { 'erlang':
-    ensure  => $version,
-    require => Apt::Source['erlang'],
+  case $::osfamily {
+    'Debian':  {
+      include apt
+      apt::source { 'erlang':
+        location   => 'http://binaries.erlang-solutions.com/debian',
+        repos      => 'contrib',
+        key        => 'A14F4FCA',
+        #key_source => 'http://binaries.erlang-solutions.com/debian/erlang_solutions.asc',
+      }
+      package { 'erlang':
+        ensure  => $version,
+        require => Apt::Source['erlang'],
+      }
+    }
+    'RedHat': {
+      class { 'epel': }
+      package { 'erlang':
+        ensure  => $version,
+        require => Class['epel']
+      }
+    }
+    default:  {
+      raise Puppet::Error, "Your operating system is not supported."
+    }
   }
 }
