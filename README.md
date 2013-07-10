@@ -1,6 +1,16 @@
-Puppet module for installing Erlang from the official repositories
-mentined on the [Erlang
+Puppet module for installing Erlang from alternative repositories.
+
+On debian it will use the official repositories
+mentioned on the [Erlang
 docs](https://www.erlang-solutions.com/downloads/download-erlang-otp).
+
+On Redhat 5 it'll use an additional EPEL repository hosted by
+[Redhat](http://repos.fedorapeople.org/repos/peter/erlang/epel-erlang.repo).
+
+On Redhat 6 it'll require EPEL.
+
+On SUSE it'll use the official repos.
+
 This module is also available on the [Puppet
 Forge](https://forge.puppetlabs.com/garethr/erlang)
 
