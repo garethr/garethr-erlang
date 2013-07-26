@@ -17,9 +17,11 @@ class erlang(
   validate_re($::osfamily, '^Debian$', 'This module uses a debian repository')
 
   apt::source { 'erlang':
-    location   => 'http://binaries.erlang-solutions.com/debian',
-    repos      => 'contrib',
-    key_source => 'http://binaries.erlang-solutions.com/debian/erlang_solutions.asc',
+    location    => 'http://binaries.erlang-solutions.com/debian',
+    key         => 'D208507CA14F4FCA',
+    repos       => 'contrib',
+    include_src => false,
+    key_source  => 'http://binaries.erlang-solutions.com/debian/erlang_solutions.asc',
   }
 
   package { 'esl-erlang':
