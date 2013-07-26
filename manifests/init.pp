@@ -19,8 +19,7 @@ class erlang(
   apt::source { 'erlang':
     location   => 'http://binaries.erlang-solutions.com/debian',
     repos      => 'contrib',
-    key        => 'A14F4FCA',
-    #key_source => 'http://binaries.erlang-solutions.com/debian/erlang_solutions.asc',
+    key_source => 'http://binaries.erlang-solutions.com/debian/erlang_solutions.asc',
   }
 
   package { 'erlang':
