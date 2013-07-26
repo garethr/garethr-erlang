@@ -22,7 +22,7 @@ class erlang(
     key_source => 'http://binaries.erlang-solutions.com/debian/erlang_solutions.asc',
   }
 
-  package { 'erlang':
+  package { 'esl-erlang':
     ensure  => $version,
     require => Apt::Source['erlang'],
   }
