@@ -2,7 +2,7 @@ class erlang::params {
 
   case $::osfamily {
     'Debian': {
-      $key_signature            = 'A14F4FCA'
+      $key_signature            = 'D208507CA14F4FCA'
       $package_name             = 'erlang-nox'
       $remote_repo_key_location = 'http://binaries.erlang-solutions.com/debian/erlang_solutions.asc'
       $remote_repo_location     = 'http://binaries.erlang-solutions.com/debian'
