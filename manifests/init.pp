@@ -1,7 +1,7 @@
 # == Class: erlang
 #
 # Module to install an up-to-date version of Erlang from the
-# official repositories 
+# official repositories
 #
 # === Parameters
 # [*version*]
@@ -10,22 +10,32 @@
 #
 #
 class erlang(
-  $version = 'present',
-) {
-  include apt
-  validate_string($version)
-  validate_re($::osfamily, '^Debian$', 'This module uses a debian repository')
+  $key_signature            = $erlang::params::key_signature,
+  $local_repo_location      = $erlang::params::local_repo_location,
+  $package_name             = $erlang::params::package_name,
+  $remote_repo_location     = $erlang::params::remote_repo_location,
+  $remote_repo_key_location = $erlang::params::remote_repo_key_location,
+  $repos                    = $erlang::params::repos,
+  $version                  = 'present',
+) inherits erlang::params {
 
-  apt::source { 'erlang':
-    location    => 'http://binaries.erlang-solutions.com/debian',
-    key         => 'D208507CA14F4FCA',
-    repos       => 'contrib',
-    include_src => false,
-    key_source  => 'http://binaries.erlang-solutions.com/debian/erlang_solutions.asc',
+  validate_string($version)
+
+  case $::osfamily {
+    'Debian': {
+      include '::apt'
+      include '::erlang::repo::apt'
+    }
+    'RedHat': {
+      # This is only needed on RHEL5, RHEL6 has erlang in EPEL.
+      if $::operatingsystemrelease =~ /^5/ {
+        include '::erlang::repo::yum'
+      }
+    }
+    default: { }
   }
 
-  package { 'esl-erlang':
-    ensure  => $version,
-    require => Apt::Source['erlang'],
+  package { $package_name:
+    ensure => $version,
   }
 }
