@@ -1,7 +1,7 @@
 require 'spec_helper_system'
 
-describe 'basic tests' do
-  it 'Puppet should work without errors' do
+describe 'The erlang pubbet module' do
+  it 'should run without errors' do
     pp = <<-EOS
       include 'erlang'
     EOS
@@ -13,7 +13,7 @@ describe 'basic tests' do
     end
   end
 
-  it 'Erlang should be available' do
+  it 'should install the erl binary into /usr/bin' do
     shell 'which erl' do |r|
       r.stdout.should =~ /\/usr\/bin\/erl/
       r.stderr.should be_empty
