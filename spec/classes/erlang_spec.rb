@@ -59,7 +59,7 @@ describe 'erlang', :type => :class do
       } }
 
       it { should contain_exec('erlang-repo-download').with(
-        'command' => 'curl -o /tmp/yum.repos.d/tmp.repo http://example.com/fake.repo',
+        'command' => 'curl -o /tmp/yum.repos.d/tmp.repo http://example.com/fake.repo'
         )
       }
     end
