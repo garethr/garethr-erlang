@@ -34,7 +34,7 @@ describe 'erlang', :type => :class do
         'location'   => 'http://example.com/debian',
         'key_source' => 'http://example.com/debian/key.asc',
         'key'        => '1234ABCD',
-        'repos'      => 'main',
+        'repos'      => 'main'
       ) }
     end
 
