@@ -43,6 +43,15 @@ describe 'erlang', :type => :class do
   context 'on RedHat 5' do
     let(:facts) { {:osfamily => 'RedHat', :operatingsystemrelease => '5.9' } }
 
+    context "epel enabled" do
+      it { should contain_class('epel') }
+    end
+
+    context "epel disabled" do
+      let(:params) {{ :epel_enable => false }}
+      it { should_not contain_class('epel') }
+    end
+
     context 'with no parameters' do
       it { should contain_package('erlang').with_ensure('present') }
       it { should contain_exec('erlang-repo-download').with(
@@ -72,6 +81,15 @@ describe 'erlang', :type => :class do
 
   context 'on RedHat 6' do
     let(:facts) { {:osfamily => 'RedHat', :operatingsystemrelease => '6.4' } }
+
+    context "epel enabled" do
+      it { should contain_class('epel') }
+    end
+
+    context "epel disabled" do
+      let(:params) {{ :epel_enable => false }}
+      it { should_not contain_class('epel') }
+    end
 
     context 'with no parameters' do
       it { should contain_package('erlang').with_ensure('present') }

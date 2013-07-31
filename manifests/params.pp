@@ -4,6 +4,9 @@
 # operating systems
 #
 class erlang::params {
+
+  $epel_enable = true
+
   case $::osfamily {
     'Debian': {
       $key_signature            = 'D208507CA14F4FCA'

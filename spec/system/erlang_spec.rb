@@ -1,6 +1,6 @@
 require 'spec_helper_system'
 
-describe 'The erlang pubbet module' do
+describe 'The erlang puppet module' do
   it 'should run without errors' do
     pp = <<-EOS
       include 'erlang'
