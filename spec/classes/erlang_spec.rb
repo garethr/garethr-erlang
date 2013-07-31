@@ -17,6 +17,27 @@ describe 'erlang', :type => :class do
       let(:params) { {'version' => 'absent' } }
       it { should contain_package('erlang-nox').with_ensure('absent') }
     end
+
+    context 'with a custom package name' do
+      let(:params) { {'package_name' => 'not-erlang' } }
+      it { should contain_package('not-erlang').with_ensure('present') }
+    end
+
+    context 'with custom repository details' do
+      let(:params) { {
+        'key_signature'            => '1234ABCD',
+        'repos'                    => 'main',
+        'remote_repo_location'     => 'http://example.com/debian',
+        'remote_repo_key_location' => 'http://example.com/debian/key.asc',
+      } }
+      it { should contain_apt__source('erlang').with(
+        'location'   => 'http://example.com/debian',
+        'key_source' => 'http://example.com/debian/key.asc',
+        'key'        => '1234ABCD',
+        'repos'      => 'main',
+      ) }
+    end
+
   end
 
   context 'on RedHat 5' do
@@ -27,6 +48,18 @@ describe 'erlang', :type => :class do
       it { should contain_exec('erlang-repo-download').with(
         'command' => 'curl -o /etc/yum.repos.d/epel-erlang.repo http://repos.fedorapeople.org/repos/peter/erlang/epel-erlang.repo',
         'path'    => '/bin:/sbin:/usr/bin:/usr/sbin:/usr/local/bin:/usr/local/sbin'
+        )
+      }
+    end
+
+    context 'with a custom repository' do
+      let(:params) { {
+        'local_repo_location'  => '/tmp/yum.repos.d/tmp.repo',
+        'remote_repo_location' => 'http://example.com/fake.repo',
+      } }
+
+      it { should contain_exec('erlang-repo-download').with(
+        'command' => 'curl -o /tmp/yum.repos.d/tmp.repo http://example.com/fake.repo',
         )
       }
     end
