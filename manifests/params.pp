@@ -5,7 +5,7 @@
 #
 class erlang::params {
 
-  $epel_enable = true
+  $epel_enable = false
 
   case $::osfamily {
     'Debian': {
