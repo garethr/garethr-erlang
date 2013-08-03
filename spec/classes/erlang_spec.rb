@@ -44,6 +44,7 @@ describe 'erlang', :type => :class do
     let(:facts) { {:osfamily => 'RedHat', :operatingsystemrelease => '5.9' } }
 
     context "epel enabled" do
+      let(:params) {{ :epel_enable => true }}
       it { should contain_class('epel') }
     end
 
@@ -83,6 +84,7 @@ describe 'erlang', :type => :class do
     let(:facts) { {:osfamily => 'RedHat', :operatingsystemrelease => '6.4' } }
 
     context "epel enabled" do
+      let(:params) {{ :epel_enable => true }}
       it { should contain_class('epel') }
     end
 
