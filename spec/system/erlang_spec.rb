@@ -1,9 +1,11 @@
 require 'spec_helper_system'
 
-describe 'The erlang pubbet module' do
+describe 'The erlang puppet module' do
   it 'should run without errors' do
     pp = <<-EOS
-      include 'erlang'
+      class { 'erlang':
+        epel_enable => true
+      }
     EOS
 
     puppet_apply(pp) do |r|
