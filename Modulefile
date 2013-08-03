@@ -1,5 +1,5 @@
 name        'garethr-erlang'
-version     '0.0.3'
+version     '0.1.0'
 source      'git://github.com/garethr/garethr-erlang.git'
 author      'Gareth Rushgrove'
 summary     'Module for installing erlang from official repos'
