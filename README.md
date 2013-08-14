@@ -11,6 +11,8 @@ On Redhat 6 it'll require EPEL.
 
 On SUSE it'll use the official repos.
 
+On Archlinux it'll use community repos.
+
 This module is also available on the [Puppet
 Forge](https://forge.puppetlabs.com/garethr/erlang)
 
