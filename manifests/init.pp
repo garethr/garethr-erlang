@@ -16,7 +16,8 @@ class erlang (
   $remote_repo_location     = $erlang::params::remote_repo_location,
   $remote_repo_key_location = $erlang::params::remote_repo_key_location,
   $repos                    = $erlang::params::repos,
-  $version                  = 'present',) inherits erlang::params {
+  $version                  = 'present',
+) inherits erlang::params {
   validate_string($version)
 
   case $::osfamily {
@@ -36,7 +37,7 @@ class erlang (
         include '::erlang::repo::yum'
       }
     }
-    default  : {
+    default : {
     }
   }
 
