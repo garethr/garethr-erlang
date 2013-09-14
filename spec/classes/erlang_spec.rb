@@ -10,7 +10,7 @@ describe 'erlang', :type => :class do
       it { should contain_apt__source('erlang').with(
         'key_source' => 'http://binaries.erlang-solutions.com/debian/erlang_solutions.asc',
         'key'        => 'D208507CA14F4FCA'
-      ) }
+        ) }
     end
 
     context 'with a custom version' do
@@ -25,17 +25,17 @@ describe 'erlang', :type => :class do
 
     context 'with custom repository details' do
       let(:params) { {
-        'key_signature'            => '1234ABCD',
-        'repos'                    => 'main',
-        'remote_repo_location'     => 'http://example.com/debian',
-        'remote_repo_key_location' => 'http://example.com/debian/key.asc',
-      } }
+          'key_signature'            => '1234ABCD',
+          'repos'                    => 'main',
+          'remote_repo_location'     => 'http://example.com/debian',
+          'remote_repo_key_location' => 'http://example.com/debian/key.asc',
+        } }
       it { should contain_apt__source('erlang').with(
         'location'   => 'http://example.com/debian',
         'key_source' => 'http://example.com/debian/key.asc',
         'key'        => '1234ABCD',
         'repos'      => 'main'
-      ) }
+        ) }
     end
 
   end
@@ -64,9 +64,9 @@ describe 'erlang', :type => :class do
 
     context 'with a custom repository' do
       let(:params) { {
-        'local_repo_location'  => '/tmp/yum.repos.d/tmp.repo',
-        'remote_repo_location' => 'http://example.com/fake.repo',
-      } }
+          'local_repo_location'  => '/tmp/yum.repos.d/tmp.repo',
+          'remote_repo_location' => 'http://example.com/fake.repo',
+        } }
 
       it { should contain_exec('erlang-repo-download').with(
         'command' => 'curl -o /tmp/yum.repos.d/tmp.repo http://example.com/fake.repo'
@@ -105,6 +105,19 @@ describe 'erlang', :type => :class do
 
   context 'on SUSE' do
     let(:facts) {{ :osfamily => 'SUSE', }}
+
+    context 'with no parameters' do
+      it { should contain_package('erlang').with_ensure('present') }
+    end
+
+    context 'with a custom version' do
+      let(:params) { {'version' => 'absent' } }
+      it { should contain_package('erlang').with_ensure('absent') }
+    end
+  end
+
+  context 'on Archlinux' do
+    let(:facts) {{ :osfamily => 'Archlinux', }}
 
     context 'with no parameters' do
       it { should contain_package('erlang').with_ensure('present') }

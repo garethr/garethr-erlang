@@ -8,8 +8,7 @@
 #   The package version to install, passed to ensure.
 #   Defaults to present.
 #
-#
-class erlang(
+class erlang (
   $epel_enable              = $erlang::params::epel_enable,
   $key_signature            = $erlang::params::key_signature,
   $local_repo_location      = $erlang::params::local_repo_location,
@@ -17,31 +16,29 @@ class erlang(
   $remote_repo_location     = $erlang::params::remote_repo_location,
   $remote_repo_key_location = $erlang::params::remote_repo_key_location,
   $repos                    = $erlang::params::repos,
-  $version                  = 'present',
-) inherits erlang::params {
-
+  $version                  = 'present',) inherits erlang::params {
   validate_string($version)
 
   case $::osfamily {
-    'Debian': {
+    'Debian' : {
       include '::apt'
       include '::erlang::repo::apt'
     }
-    'RedHat': {
+    'RedHat' : {
       if $epel_enable {
         # Include epel as this is a requirement for erlang in RHEL6.
         include '::epel'
         Class['epel'] -> Package[$package_name]
       }
+
       # This is only needed on RHEL5, RHEL6 has erlang in EPEL.
       if $::operatingsystemrelease =~ /^5/ {
         include '::erlang::repo::yum'
       }
     }
-    default: { }
+    default  : {
+    }
   }
 
-  package { $package_name:
-    ensure => $version,
-  }
+  package { $package_name: ensure => $version, }
 }
