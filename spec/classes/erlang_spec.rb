@@ -2,10 +2,12 @@ require 'spec_helper'
 
 describe 'erlang', :type => :class do
 
+
   context 'on Debian' do
     let(:facts) { {:osfamily => 'Debian', :lsbdistcodename => 'squeeze'} }
 
     context 'with no parameters' do
+      it { should compile.with_all_deps }
       it { should contain_package('erlang-nox').with_ensure('present') }
       it { should contain_apt__source('erlang').with(
         'key_source' => 'http://binaries.erlang-solutions.com/debian/erlang_solutions.asc',
