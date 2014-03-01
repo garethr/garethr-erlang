@@ -4,7 +4,11 @@ describe 'erlang', :type => :class do
 
 
   context 'on Debian' do
-    let(:facts) { {:osfamily => 'Debian', :lsbdistcodename => 'squeeze'} }
+    let(:facts) { {
+      :osfamily => 'Debian',
+      :lsbdistid => 'debian',
+      :lsbdistcodename => 'squeeze'
+    }}
 
     context 'with no parameters' do
       it { should compile.with_all_deps }
