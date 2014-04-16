@@ -10,8 +10,8 @@ class erlang::params {
     'Debian' : {
       $key_signature            = 'D208507CA14F4FCA'
       $package_name             = 'erlang-nox'
-      $remote_repo_key_location = 'http://binaries.erlang-solutions.com/debian/erlang_solutions.asc'
-      $remote_repo_location     = 'http://binaries.erlang-solutions.com/debian'
+      $remote_repo_key_location = 'http://packages.erlang-solutions.com/debian/erlang_solutions.asc'
+      $remote_repo_location     = 'http://packages.erlang-solutions.com/debian'
       $repos                    = 'contrib'
     }
     'RedHat', 'SUSE', 'Archlinux' : {
