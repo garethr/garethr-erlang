@@ -3,6 +3,11 @@ require 'puppet-lint/tasks/puppet-lint'
 require 'puppet-syntax/tasks/puppet-syntax'
 require 'rspec-system/rake_task'
 
+begin
+    require 'puppet_blacksmith/rake_tasks'
+rescue LoadError
+end
+
 PuppetLint.configuration.log_format = "%{path}:%{linenumber}:%{check}:%{KIND}:%{message}"
 PuppetLint.configuration.fail_on_warnings = true
 

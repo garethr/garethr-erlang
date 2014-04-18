@@ -9,3 +9,7 @@ gem "puppetlabs_spec_helper"
 gem "rspec-system-puppet"
 gem "vagrant-wrapper"
 gem "puppet-syntax"
+
+group :development do
+  gem "puppet-blacksmith"
+end
