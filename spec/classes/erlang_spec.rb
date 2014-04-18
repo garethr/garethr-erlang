@@ -14,7 +14,7 @@ describe 'erlang', :type => :class do
       it { should compile.with_all_deps }
       it { should contain_package('erlang-nox').with_ensure('present') }
       it { should contain_apt__source('erlang').with(
-        'key_source' => 'http://binaries.erlang-solutions.com/debian/erlang_solutions.asc',
+        'key_source' => 'http://packages.erlang-solutions.com/debian/erlang_solutions.asc',
         'key'        => 'D208507CA14F4FCA'
         ) }
     end
