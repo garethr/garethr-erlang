@@ -19,7 +19,7 @@ class erlang::params {
 
       if $::operatingsystemrelease =~ /^5/ {
         $local_repo_location  = '/etc/yum.repos.d/epel-erlang.repo'
-        $remote_repo_location = 'http://repos.fedorapeople.org/repos/peter/erlang/epel-erlang.repo'
+        $remote_repo_location = 'https://repos.fedorapeople.org/repos/peter/erlang/epel-erlang.repo'
       }
     }
     default : {
