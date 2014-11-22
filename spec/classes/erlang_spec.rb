@@ -62,7 +62,7 @@ describe 'erlang', :type => :class do
     context 'with no parameters' do
       it { should contain_package('erlang').with_ensure('present') }
       it { should contain_exec('erlang-repo-download').with(
-        'command' => 'curl -o /etc/yum.repos.d/epel-erlang.repo http://repos.fedorapeople.org/repos/peter/erlang/epel-erlang.repo',
+        'command' => 'curl -o /etc/yum.repos.d/epel-erlang.repo https://repos.fedorapeople.org/repos/peter/erlang/epel-erlang.repo',
         'path'    => '/bin:/sbin:/usr/bin:/usr/sbin:/usr/local/bin:/usr/local/sbin'
         )
       }
