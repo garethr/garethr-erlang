@@ -2,3 +2,4 @@ pkg
 spec/fixtures
 tests
 .rspec_system
+.bundle
