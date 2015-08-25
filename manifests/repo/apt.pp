@@ -31,10 +31,10 @@ class erlang::repo::apt(
   Class['erlang::repo::apt'] -> Package<| title == $package_name |>
 
   apt::source { 'erlang':
-    include => { 
+    include  => {
       'src' => false,
     },
-    key => { 
+    key      => {
       'id'     => $key_signature,
       'source' => $remote_repo_key_location,
     },
