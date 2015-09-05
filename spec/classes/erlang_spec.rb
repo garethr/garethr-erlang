@@ -49,16 +49,6 @@ describe 'erlang', :type => :class do
   context 'on RedHat 5' do
     let(:facts) { {:osfamily => 'RedHat', :operatingsystemrelease => '5.9' } }
 
-    context "epel enabled" do
-      let(:params) {{ :epel_enable => true }}
-      it { should contain_class('epel') }
-    end
-
-    context "epel disabled" do
-      let(:params) {{ :epel_enable => false }}
-      it { should_not contain_class('epel') }
-    end
-
     context 'with no parameters' do
       it { should contain_package('erlang').with_ensure('present') }
       it { should contain_exec('erlang-repo-download').with(
@@ -89,25 +79,32 @@ describe 'erlang', :type => :class do
   context 'on RedHat 6' do
     let(:facts) { {:osfamily => 'RedHat', :operatingsystemrelease => '6.4' } }
 
-    context "epel enabled" do
-      let(:params) {{ :epel_enable => true }}
-      it { should contain_class('epel') }
-    end
-
-    context "epel disabled" do
-      let(:params) {{ :epel_enable => false }}
-      it { should_not contain_class('epel') }
-    end
-
-    context 'with no parameters' do
+  context 'with no parameters' do
       it { should contain_package('erlang').with_ensure('present') }
+      it { should contain_exec('erlang-repo-download').with(
+        'command' => 'curl -o /etc/yum.repos.d/erlang-solutions.repo http://packages.erlang-solutions.com/rpm/centos/erlang_solutions.repo',
+        'path'    => '/bin:/sbin:/usr/bin:/usr/sbin:/usr/local/bin:/usr/local/sbin'
+        )
+      }
+    end
+
+    context 'with a custom repository' do
+      let(:params) { {
+          'local_repo_location'  => '/tmp/yum.repos.d/tmp.repo',
+          'remote_repo_location' => 'http://example.com/fake.repo',
+        } }
+
+      it { should contain_exec('erlang-repo-download').with(
+        'command' => 'curl -o /tmp/yum.repos.d/tmp.repo http://example.com/fake.repo'
+        )
+      }
     end
 
     context 'with a custom version' do
       let(:params) { {'version' => 'absent' } }
       it { should contain_package('erlang').with_ensure('absent') }
     end
-  end
+  end 
 
   context 'on SUSE' do
     let(:facts) {{ :osfamily => 'SUSE', }}
