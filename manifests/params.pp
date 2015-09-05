@@ -4,7 +4,6 @@
 # operating systems
 #
 class erlang::params {
-  $epel_enable = false
 
   case $::osfamily {
     'Debian' : {
@@ -23,8 +22,8 @@ class erlang::params {
         $local_repo_location  = '/etc/yum.repos.d/epel-erlang.repo'
         $remote_repo_location = 'https://repos.fedorapeople.org/repos/peter/erlang/epel-erlang.repo'
       } else {
-        $local_repo_location  = undef
-        $remote_repo_location = undef
+        $local_repo_location  = '/etc/yum.repos.d/erlang-solutions.repo'
+        $remote_repo_location = 'http://packages.erlang-solutions.com/rpm/centos/erlang_solutions.repo'
       }
 
       $remote_repo_key_location = undef
