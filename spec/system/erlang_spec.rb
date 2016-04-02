@@ -3,9 +3,7 @@ require 'spec_helper_system'
 describe 'The erlang puppet module' do
   it 'should run without errors' do
     pp = <<-EOS
-      class { 'erlang':
-        epel_enable => true
-      }
+      class { 'erlang': }
     EOS
 
     puppet_apply(pp) do |r|
