@@ -4,20 +4,24 @@ describe 'erlang', :type => :class do
 
 
   context 'on Debian' do
-    let(:facts) { {
-      :osfamily => 'Debian',
-      :lsbdistid => 'debian',
-      :lsbdistcodename => 'squeeze',
-      :operatingsystemrelease => '5'
-    }}
+    let(:facts) do
+      {
+        os: { family: 'Debian', name: 'Debian', release: { major: '8', full: '8.0' } },
+        lsbdistid: 'Debian',
+        osfamily: 'Debian',
+        lsbdistcodename: 'jessie',
+      }
+    end
 
     context 'with no parameters' do
       it { should compile.with_all_deps }
       it { should contain_package('erlang-nox').with_ensure('present') }
       it { should contain_apt__source('erlang').with(
-        'key_source' => 'http://packages.erlang-solutions.com/debian/erlang_solutions.asc',
-        'key'        => '434975BD900CCBE4F7EE1B1ED208507CA14F4FCA'
-        ) }
+        'key' => {
+          'source' => 'http://packages.erlang-solutions.com/debian/erlang_solutions.asc',
+          'id' => '434975BD900CCBE4F7EE1B1ED208507CA14F4FCA',
+        }
+      ) }
     end
 
     context 'with a custom version' do
@@ -38,10 +42,12 @@ describe 'erlang', :type => :class do
           'remote_repo_key_location' => 'http://example.com/debian/key.asc',
         } }
       it { should contain_apt__source('erlang').with(
-        'location'   => 'http://example.com/debian',
-        'key_source' => 'http://example.com/debian/key.asc',
-        'key'        => '1234ABCD',
-        'repos'      => 'main'
+        'location' => 'http://example.com/debian',
+        'key'      => {
+          'id'     => '1234ABCD',
+          'source' => 'http://example.com/debian/key.asc',
+        },
+        'repos'    => 'main'
         ) }
     end
 
