@@ -4,7 +4,7 @@ bundler_args: --without development
 before_install: rm Gemfile.lock || true
 sudo: false
 rvm:
-  - 2.2
+  - 2.5
 script: bundle exec rake test
 env:
   - PUPPET_GEM_VERSION="~> 4.0.0"
@@ -13,11 +13,11 @@ env:
   - PUPPET_GEM_VERSION="~> 5.5.0"
 matrix:
   exclude:
-    - rvm: 2.2
+    - rvm: 2.5
       env: PUPPET_GEM_VERSION="~> 4.0.0"
-    - rvm: 2.2
+    - rvm: 2.5
       env: PUPPET_GEM_VERSION="~> 4.1.0"
-    - rvm: 2.2
+    - rvm: 2.5
       env: PUPPET_GEM_VERSION="~> 5.0.0"
-    - rvm: 2.2
+    - rvm: 2.5
       env: PUPPET_GEM_VERSION="~> 5.5.0"
