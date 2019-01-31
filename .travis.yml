@@ -10,7 +10,5 @@ rvm:
   - 2.5
 script: bundle exec rake test
 env:
-  - PUPPET_GEM_VERSION="~> 4.0.0"
-  - PUPPET_GEM_VERSION="~> 4.1.0"
   - PUPPET_GEM_VERSION="~> 5.0.0"
   - PUPPET_GEM_VERSION="~> 5.5.0"
